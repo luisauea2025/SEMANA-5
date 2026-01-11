@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ConteoVocales
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // 1. Pedir palabra al usuario
+            Console.Write("Introduce una palabra: ");
+            string palabra = Console.ReadLine().ToLower();
+
+            // 2. Crear un diccionario para almacenar el conteo de cada vocal
+            Dictionary<char, int> conteoVocales = new Dictionary<char, int>
+            {
+                {'a', 0}, {'e', 0}, {'i', 0}, {'o', 0}, {'u', 0}
+            };
+
+            // 3. Recorrer la palabra y contar
+            foreach (char letra in palabra)
+            {
+                if (conteoVocales.ContainsKey(letra))
+                {
+                    conteoVocales[letra]++;
+                }
+            }
+
+            // 4. Mostrar resultados por pantalla
+            Console.WriteLine("\nResultado del conteo:");
+            foreach (var vocal in conteoVocales)
+            {
+                Console.WriteLine($"La vocal '{vocal.Key}' aparece: {vocal.Value} veces.");
+            }
+
+            // Pausa final para la terminal
+            Console.WriteLine("\nPresione cualquier tecla para salir...");
+            Console.ReadKey();
+        } // Llave de cierre del Main
+    } // Llave de cierre de la clase Program
+} // Llave de cierre del namespace

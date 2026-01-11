@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace EjercicioAsignaturas
+{
+    // Definimos una clase para representar el Curso
+    public class Curso
+    {
+        // Lista para almacenar los nombres de las asignaturas
+        private List<string> asignaturas;
+
+        public Curso()
+        {
+            // Inicializamos la lista con los ejemplos proporcionados
+            asignaturas = new List<string> { "Matemáticas", "Física", "Química", "Historia", "Lengua" };
+        }
+
+        // Método para mostrar los mensajes personalizados
+        public void MostrarMensajesDeEstudio()
+        {
+            Console.WriteLine("--- Mis Materias de Estudio ---");
+            foreach (string asignatura in asignaturas)
+            {
+                // Mostramos el mensaje dinámico solicitado
+                Console.WriteLine($"Yo estudio {asignatura}");
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Instanciamos el objeto de la clase Curso
+            Curso miCurso = new Curso();
+
+            // Llamamos al método que recorre la lista y muestra los mensajes
+            miCurso.MostrarMensajesDeEstudio();
+
+            // Pausa para ver el resultado en consola
+            Console.WriteLine("\nPresione cualquier tecla para salir...");
+            Console.ReadKey();
+        }
+    }
+}

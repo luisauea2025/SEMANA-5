@@ -1,0 +1,117 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace GestionAcademica
+{
+    // Clase que representa una Asignatura (POO)
+    public class Asignatura
+    {
+        public string Nombre { get; set; }
+        public double Calificacion { get; set; }
+
+        public Asignatura(string nombre)
+        {
+            Nombre = nombre;
+        }
+    }
+
+    // Clase que gestiona el Curso y las operaciones solicitadas
+    public class GestorCurso
+    {
+        private List<Asignatura> listaAsignaturas = new List<Asignatura>();
+
+        // Ejercicio 1: Almacenar asignaturas en una lista y mostrarlas
+        public void CargarAsignaturasPredeterminadas()
+        {
+            string[] nombres = { "Matemáticas", "Física", "Química", "Historia", "Lengua" };
+            foreach (var nombre in nombres)
+            {
+                listaAsignaturas.Add(new Asignatura(nombre));
+            }
+        }
+
+        public void MostrarAsignaturas()
+        {
+            Console.WriteLine("\n--- Lista de Asignaturas ---");
+            listaAsignaturas.ForEach(a => Console.WriteLine($"- {a.Nombre}"));
+        }
+
+        // Ejercicio 2: Mostrar mensaje "Yo estudio <asignatura>"
+        public void MostrarMensajeEstudio()
+        {
+            Console.WriteLine("\n--- Mensajes de Estudio ---");
+            foreach (var asignatura in listaAsignaturas)
+            {
+                Console.WriteLine($"Yo estudio {asignatura.Nombre}");
+            }
+        }
+
+        // Ejercicio 3: Almacenar y mostrar notas del usuario
+        public void PedirNotas()
+        {
+            Console.WriteLine("\n--- Ingreso de Calificaciones ---");
+            foreach (var asignatura in listaAsignaturas)
+            {
+                Console.Write($"¿Qué nota has sacado en {asignatura.Nombre}?: ");
+                if (double.TryParse(Console.ReadLine(), out double nota))
+                    asignatura.Calificacion = nota;
+            }
+        }
+
+        public void MostrarNotas()
+        {
+            Console.WriteLine("\n--- Reporte de Notas ---");
+            foreach (var asignatura in listaAsignaturas)
+            {
+                Console.WriteLine($"En {asignatura.Nombre} has sacado {asignatura.Calificacion}");
+            }
+        }
+
+        // Ejercicio 4: Eliminar asignaturas aprobadas (nota >= 5)
+        public void FiltrarReprobadas()
+        {
+            // Eliminamos de la lista las que tienen nota mayor o igual a 5
+            listaAsignaturas.RemoveAll(a => a.Calificacion >= 5);
+        }
+
+        public void MostrarReprobadas()
+        {
+            Console.WriteLine("\n--- Asignaturas a Repetir (Reprobadas) ---");
+            if (listaAsignaturas.Count == 0)
+                Console.WriteLine("¡Felicidades! Aprobaste todas.");
+            else
+                listaAsignaturas.ForEach(a => Console.WriteLine($"- {a.Nombre}"));
+        }
+
+        // Ejercicio 5: Contar palabras en una frase (Extra basado en lógica de listas)
+        public void ContarPalabras(string frase)
+        {
+            string[] palabras = frase.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            Console.WriteLine($"\nLa frase contiene {palabras.Length} palabras.");
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            GestorCurso miCurso = new GestorCurso();
+
+            // Ejecución de los 5 ejercicios
+            miCurso.CargarAsignaturasPredeterminadas(); // Ejercicio 1 (Carga)
+            miCurso.MostrarAsignaturas();               // Ejercicio 1 (Muestra)
+            
+            miCurso.MostrarMensajeEstudio();            // Ejercicio 2
+            
+            miCurso.PedirNotas();                       // Ejercicio 3 (Entrada)
+            miCurso.MostrarNotas();                     // Ejercicio 3 (Salida)
+            
+            miCurso.FiltrarReprobadas();                // Ejercicio 4 (Lógica)
+            miCurso.MostrarReprobadas();                // Ejercicio 4 (Salida)
+            
+            miCurso.ContarPalabras("Hola mundo desde C Sharp"); // Ejercicio 5
+
+            Console.WriteLine("\nPresione cualquier tecla para salir...");
+            Console.ReadKey();
+        }
+    }
